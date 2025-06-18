@@ -1,0 +1,22 @@
+{
+  "usuarios": [
+    {
+      "id": 1,
+      "username": "cris",
+      "email": "buenocris02@gmail.com",
+      "password": "1234",
+      "fullName": "Cristopher Bueno",
+      "rol": "admin",
+      "activo": true
+    },
+    {
+      "id": 2,
+      "username": "sebas",
+      "email": "sebas@gmail.com",
+      "password": "4321",
+      "fullName": "Sebastian Pinilla",
+      "rol": "funcionario",
+      "activo": true
+    }
+  ]
+}
