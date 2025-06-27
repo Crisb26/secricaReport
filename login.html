@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - SECRICA REPORT</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/mensajes.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="logo-container">
+                <div class="logo-defensa-civil">
+                    <div class="logo-circle">
+                        <span class="logo-text">SRDC</span>
+                    </div>
+                </div>
+                <h1>Sistema de Reportes</h1>
+                <h2>Defensa Civil Colombiana</h2>
+                <p class="subtitle">Seccional Quindío</p>
+            </div>
+            
+            <!-- mensaje de resultado -->
+            <div id="mensajeLogin" class="mensaje hidden"></div>
+            
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="email" class="form-label">Correo Electrónico</label>
+                    <input type="email" id="email" class="form-control" placeholder="ejemplo@gmail.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn btn--primary btn--full-width">
+                    Iniciar Sesión
+                </button>
+            </form>
+            <div class="form-footer">
+                <p>¿No tienes cuenta? <a href="registro.html">Crear Cuenta</a></p>
+                <p><a href="index.html">Volver al Inicio</a></p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="scripts/crypto-utils.js"></script>
+    <script src="scripts/login.js"></script>
+    <script src="scripts/utilidades.js"></script>
+</body>
+</html>

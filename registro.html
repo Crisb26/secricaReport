@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Cuenta - SECRICA REPORT</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/registro.css">
+</head>
+<body>
+    <div class="registro-container">
+        <div class="registro-card">
+            <div class="logo-container">
+                <div class="logo-defensa-civil">
+                    <div class="logo-circle">
+                        <span class="logo-text">SRDC</span>
+                    </div>
+                </div>
+                <h1>Crear Cuenta</h1>
+                <h2>SECRICA REPORT</h2>
+                <p class="subtitle">Defensa Civil Quindío</p>
+            </div>
+            <form id="registroform" class="registro-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nombres" class="form-label">Nombres</label>
+                        <input type="text" id="nombres" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="apellidos" class="form-label">Apellidos</label>
+                        <input type="text" id="apellidos" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="form-label">Correo Electrónico</label>
+                    <input type="email" id="email" class="form-control" required>
+                    <small class="form-help">Usa tu correo institucional si eres funcionario</small>
+                </div>
+                <div class="form-group">
+                    <label for="telefono" class="form-label">Teléfono</label>
+                    <input type="tel" id="telefono" class="form-control" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="municipio" class="form-label">Municipio</label>
+                        <select id="municipio" class="form-control" required>
+                            <option value="">Seleccionar municipio</option>
+                            <option value="armenia">Armenia</option>
+                            <option value="calarca">Calarcá</option>
+                            <option value="circasia">Circasia</option>
+                            <option value="cordoba">Córdoba</option>
+                            <option value="filandia">Filandia</option>
+                            <option value="genova">Génova</option>
+                            <option value="la-tebaida">La Tebaida</option>
+                            <option value="montenegro">Montenegro</option>
+                            <option value="pijao">Pijao</option>
+                            <option value="quimbaya">Quimbaya</option>
+                            <option value="salento">Salento</option>
+                            <option value="buenavista">Buenavista</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="rol" class="form-label">Tipo de Usuario</label>
+                        <select id="rol" class="form-control" required>
+                            <option value="">Seleccionar tipo</option>
+                            <option value="voluntario">Voluntario</option>
+                            <option value="funcionario">Funcionario</option>
+                            <option value="comunidad">Comunidad</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="password" class="form-label">Contraseña</label>
+                        <input type="password" id="password" class="form-control" required>
+                        <small class="form-help">Mínimo 6 caracteres</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmpassword" class="form-label">Confirmar Contraseña</label>
+                        <input type="password" id="confirmpassword" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="terminos" required>
+                        <span class="checkmark"></span>
+                        Acepto los términos y condiciones del sistema SECRICA REPORT
+                    </label>
+                </div>
+                <button type="submit" class="btn btn--primary btn--full-width">
+                    Crear Cuenta
+                </button>
+            </form>
+            <div class="form-footer">
+                <p>¿Ya tienes cuenta? <a href="login.html">Iniciar Sesión</a></p>
+                <p><a href="index.html">Volver al Inicio</a></p>
+            </div>
+            <div id="mensajeregistro" class="mensaje hidden"></div>
+        </div>
+    </div>
+    <script src="scripts/registro.js"></script>
+    <script src="scripts/crypto-utils.js"></script>
+    <script src="scripts/sistema.js"></script>
+    <script src="scripts/clima-ia.js"></script>
+    <script src="scripts/seguimiento-ia.js"></script>
+    <script src="scripts/chatbot-ia.js"></script>
+    
+</body>
+</html>

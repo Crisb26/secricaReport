@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema - SECRICA REPORT</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/sistema.css">
+</head>
+<body>
+    <div class="sistema-container">
+        <!-- Header -->
+        <header class="sistema-header">
+            <div class="header-content">
+                <div class="logo-sistema">
+                    <img src="assets/images/logo-defensa-civil.png.png" alt="Defensa Civil" class="logo-img">
+                    <div class="logo-text">
+                        <h1>SECRICA REPORT</h1>
+                        <p>Sistema de Reportes - Defensa Civil Quindío</p>
+                    </div>
+                </div>
+                <div class="user-info">
+                    <span id="usuarioActual">Cargando...</span>
+                    <button onclick="cerrarSesion()" class="btn btn-logout">Cerrar Sesión</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navegación -->
+        <nav class="sistema-nav">
+            <div class="nav-content">
+                <button class="nav-btn active" data-section="dashboard">📊 Dashboard</button>
+                <button class="nav-btn" data-section="reportes">📝 Reportes</button>
+                <button class="nav-btn" data-section="clima">🌤️ Clima IA</button>
+                <button class="nav-btn" data-section="seguimiento">📈 Seguimiento IA</button>
+                <button class="nav-btn" data-section="usuarios">👥 Usuarios</button>
+            </div>
+        </nav>
+
+        <!-- Contenido Principal -->
+        <main class="sistema-main">
+            <!-- Dashboard -->
+            <section id="dashboard" class="seccion active">
+                <h2>Dashboard Principal</h2>
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <h3>Reportes Hoy</h3>
+                        <div class="card-number" id="reportesHoy">0</div>
+                        <p>Reportes registrados hoy</p>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3>Usuarios Activos</h3>
+                        <div class="card-number" id="usuariosActivos">0</div>
+                        <p>Usuarios en el sistema</p>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3>Emergencias</h3>
+                        <div class="card-number alertas" id="emergenciasAbiertas">0</div>
+                        <p>Casos abiertos</p>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3>Clima Actual</h3>
+                        <div class="card-weather" id="climaActual">Cargando...</div>
+                        <p id="ubicacionClima">Armenia, Quindío</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Reportes -->
+            <section id="reportes" class="seccion">
+                <h2>Gestión de Reportes</h2>
+                <div class="reportes-container">
+                    <button class="btn btn-primary" onclick="nuevoReporte()">+ Nuevo Reporte</button>
+                    <div class="reportes-lista" id="listaReportes">
+                        <!-- Reportes se cargan dinámicamente -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Clima IA -->
+            <section id="clima" class="seccion">
+                <h2>Sistema de Clima con IA</h2>
+                <div class="clima-container">
+                    <div class="clima-actual">
+                        <h3>Clima Actual - Armenia, Quindío</h3>
+                        <div id="climaDetallado">Cargando datos meteorológicos...</div>
+                    </div>
+                    <div class="clima-prediccion">
+                        <h3>Predicción IA - Próximos 5 días</h3>
+                        <div id="prediccionIA">Analizando patrones climáticos...</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seguimiento IA -->
+            <section id="seguimiento" class="seccion">
+                <h2>Seguimiento Inteligente de Reportes</h2>
+                <div class="seguimiento-container">
+                    <div class="seguimiento-stats">
+                        <h3>Análisis IA de Reportes</h3>
+                        <div id="analisisIA">Analizando patrones de reportes...</div>
+                    </div>
+                    <div class="seguimiento-chart">
+                        <h3>Tendencias Detectadas</h3>
+                        <canvas id="chartTendencias"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Usuarios -->
+            <section id="usuarios" class="seccion">
+                <h2>Gestión de Usuarios</h2>
+                <div class="usuarios-container">
+                    <div class="usuarios-lista" id="listaUsuarios">
+                        <!-- Usuarios se cargan dinámicamente -->
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="scripts/crypto-utils.js"></script>
+    <script src="scripts/sistema.js"></script>
+    <script src="scripts/clima-ia.js"></script>
+    <script src="scripts/seguimiento-ia.js"></script>
+    <script src="scripts/crypto-utils.js"></script>
+    <script src="scripts/chatbot-ia.js"></script>
+    
+</body>
+</html>
