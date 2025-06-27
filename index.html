@@ -3,266 +3,417 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Reportes - Defensa Civil Colombiana - Seccional Quindío</title>
-    <link rel="stylesheet" href="styles/style.css">
+    <title>SECRICA REPORT - Defensa Civil Quindío</title>
+    <link rel="stylesheet" href="styles/inicio.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="estilos/principal.css">
+    <link rel="stylesheet" href="estilos/inicio.css">
+    <link rel="stylesheet" href="estilos/responsive.css">
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com"  crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="loginPage" class="login-container">
-        <div class="login-card">
-            <div class="logo-container">
-                <div class="logo-defensa-civil">
-                    <div class="logo-circle">
-                        <span class="logo-text">SRDC</span>
-                    </div>
-                </div>
-                <h1>Sistema de Reportes</h1>
-                <h2>Defensa Civil Colombiana</h2>
-                <p class="subtitle">Seccional Quindío</p>
+    <!-- navegacion principal -->
+    <header class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <img src="assets/images/logo-defensa-civil.png.png" alt="Logo Defensa Civil" class="logo">
+                <span class="brand-text">SECRICA REPORT</span>
             </div>
-            <form id="loginForm" class="login-form">
-                <div class="form-group">
-                    <label for="email" class="form-label">Correo Electronico</label>
-                    <input type="email" id="email" class="form-control" placeholder="ejemplo@gmail.com" required>
-                </div>
-                <div class="form-group">
-                    <label for="password" class="form-label">Contraseña</label>
-                    <input type="password" id="password" class="form-control" placeholder="••••••••" required>
-                </div>
-                <button type="submit" class="btn btn--primary btn--full-width">
-                    Iniciar Sesión
-                </button>
-            </form>
-            <div id="mensajeLogin" class="mensaje hidden"></div>
+            <nav class="nav-menu">
+                <a href="#inicio" class="nav-link">Inicio</a>
+                <a href="#quienes-somos" class="nav-link">Quiénes Somos</a>
+                <a href="#municipios" class="nav-link">Municipios</a>
+                <a href="#cultura" class="nav-link">Cultura</a>
+                <a href="#contacto" class="nav-link">Contacto</a>
+                <a href="login.html" class="btn-login">Iniciar Sesión</a>
+            </nav>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
-    </div>
-    <div id="dashboardPage" class="dashboard-container hidden">
-        <header class="dashboard-header">
-            <div class="header-content">
-                <div class="logo-section">
-                    <div class="logo-defensa-civil-small">
-                        <div class="logo-circle-small">
-                            <span class="logo-text-small">DCC</span>
-                        </div>
-                    </div>
-                    <div class="header-text">
-                        <h1>Sistema de Reportes</h1>
-                        <p>Defensa Civil Colombiana - Seccional Quindio</p>
-                    </div>
-                </div>
-                <div class="user-section">
-                    <div class="user-info">
-                        <span id="nombreUsuario" class="user-name">Usuario</span>
-                        <span id="horaActual" class="current-time">--:--:--</span>
-                    </div>
-                    <button id="cerrarSesionBtn" class="btn btn--secondary">
-                        Cerrar Sesión
-                    </button>
-                </div>
-            </div>
-        </header>
-        <main class="dashboard-main">
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon">📋</div>
-                    <div class="stat-content">
-                        <h3>Reportes Activos</h3>
-                        <p class="stat-number" id="reportesActivos">15</p>
-                        <span class="stat-change">+3 hoy</span>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">🚨</div>
-                    <div class="stat-content">
-                        <h3>Emergencias Resueltas</h3>
-                        <p class="stat-number" id="emergenciasResueltas">142</p>
-                        <span class="stat-change">+8 esta semana</span>
-                    </div>
-                </div>               
-                <div class="stat-card">
-                    <div class="stat-icon">🛠️</div>
-                    <div class="stat-content">
-                        <h3>Recursos Disponibles</h3>
-                        <p class="stat-number" id="recursosDisponibles">28</p>
-                        <span class="stat-change">en servicio</span>
-                    </div>
-                </div>              
-                <div class="stat-card">
-                    <div class="stat-icon">⚠️</div>
-                    <div class="stat-content">
-                        <h3>Alertas Tempranas</h3>
-                        <p class="stat-number" id="alertasTempranas">3</p>
-                        <span class="stat-change">activas</span>
-                    </div>
-                </div>
-            </div>
-            <div class="dashboard-grid">
-                <section class="dashboard-section">
-                    <div class="section-header">
-                        <h2>Reportes Recientes</h2>
-                        <button class="btn btn--secondary btn--sm" onclick="abrirModalNuevoReporte()">
-                            Nuevo Reporte
-                        </button>
-                    </div>
-                    <div id="reportesList" class="reports-list">
-                    </div>
-                </section>
-                <section class="dashboard-section">
-                    <div class="section-header">
-                        <h2>Organizaciones del Quindio</h2>
-                        <button class="btn btn--secondary btn--sm" onclick="verDetallesMunicipios()">
-                            Ver Detalles
-                        </button>
-                    </div>
-                    <div class="municipios-grid">
-                        <div class="municipio-item">
-                            <span class="municipio-name">Armenia</span>
-                            <span class="municipio-status status--conectado">3 Unidades</span>
-                        </div>
-                        <div class="municipio-item">
-                            <span class="municipio-name">Salento</span>
-                            <span class="municipio-status status--conectado">1 Unidad</span>
-                        </div>
-                        <div class="municipio-item">
-                            <span class="municipio-name">Circasia</span>
-                            <span class="municipio-status status--conectado">3 Unidades</span>
-                        </div>
-                        <div class="municipio-item">
-                            <span class="municipio-name">Quimbaya</span>
-                            <span class="municipio-status status--conectado">3 Unidades</span>
-                        </div>
-                        <div class="municipio-item">
-                            <span class="municipio-name">Montenegro</span>
-                            <span class="municipio-status status--conectado">3 Unidades</span>
-                        </div>
-                        <div class="municipio-item">
-                            <span class="municipio-name">La Tebaida</span>
-                            <span class="municipio-status status--conectado">3 Unidades</span>
-                        </div>
-                    </div>
-                </section>
-                <section class="dashboard-section">
-                    <div class="section-header">
-                        <h2>Acciones Rápidas</h2>
-                    </div>
-                    <div class="actions-grid">
-                        <button class="action-card" onclick="verEmergenciasActivas()">
-                            <div class="action-icon">🚨</div>
-                            <h3>Ver Emergencias</h3>
-                            <p>Emergencias activas</p>
-                        </button>
-                        <button class="action-card" onclick="verAlertasTempranas()">
-                            <div class="action-icon">⚠️</div>
-                            <h3>Alertas Tempranas</h3>
-                            <p>Sistema de alertas</p>
-                        </button>                       
-                        <button class="action-card" onclick="gestionarRecursos()">
-                            <div class="action-icon">🛠️</div>
-                            <h3>Recursos</h3>
-                            <p>Gestión de recursos</p>
-                        </button>                      
-                        <button class="action-card" onclick="exportarBitacora()">
-                            <div class="action-icon">📊</div>
-                            <h3>Exportar</h3>
-                            <p>Descargar bitácora</p>
-                        </button>
-                    </div>
-                </section>
-            </div>
-        </main>
-    </div>
-    <div id="modalNuevoReporte" class="modal hidden">
-        <div class="modal-overlay" onclick="cerrarModalNuevoReporte()"></div>
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Nuevo Reporte de Emergencia</h2>
-                <button class="modal-close" onclick="cerrarModalNuevoReporte()">&times;</button>
-            </div>           
-            <form id="formNuevoReporte" class="modal-body">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="fechaHoraReporte" class="form-label">Fecha y Hora</label>
-                        <input type="datetime-local" id="fechaHoraReporte" class="form-control" required>
-                    </div>                  
-                    <div class="form-group">
-                        <label for="tipoEmergencia" class="form-label">Tipo de Emergencia</label>
-                        <select id="tipoEmergencia" class="form-control" required>
-                            <option value="">Seleccionar tipo</option>
-                            <option value="Incendio Forestal">🔥 Incendio Forestal</option>
-                            <option value="Incendio Estructural">🏠 Incendio Estructural</option>
-                            <option value="Deslizamiento">🏔️ Deslizamiento</option>
-                            <option value="Inundación">🌊 Inundación</option>
-                            <option value="Rescate Animal">🐕 Rescate Animal</option>
-                            <option value="Rescate Persona">👤 Rescate Persona</option>
-                            <option value="Emergencia Médica">🚑 Emergencia Medica</option>
-                            <option value="Accidente de Tránsito">🚗 Accidente de Transito</option>
-                            <option value="Árbol Caído">🌳 Árbol Caído</option>
-                            <option value="Avalancha">⛰️ Avalancha</option>
-                            <option value="Derrame de Combustible">⛽ Derrame de Combustible</option>
-                            <option value="Emergencia Tecnológica">💻 Emergencia Tecnologica</option>
-                            <option value="Otra">❓ Otra... ¿Cual?</option>
-                        </select>
-                    </div>
-                </div>               
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="municipioReporte" class="form-label">Municipio</label>
-                        <select id="municipioReporte" class="form-control" required onchange="actualizarUnidadesRadiales()">
-                            <option value="">Seleccionar municipio</option>
-                        </select>
-                    </div>                   
-                    <div class="form-group">
-                        <label for="prioridadReporte" class="form-label">Nivel de Prioridad</label>
-                        <select id="prioridadReporte" class="form-control" required>
-                            <option value="">Seleccionar prioridad</option>
-                            <option value="ALTA">🚨 ALTA - Riesgo inminente</option>
-                            <option value="MEDIA">⚠️ MEDIA - Requiere atención</option>
-                            <option value="BAJA">ℹ️ BAJA - Sin riesgo inmediato</option>
-                        </select>
-                    </div>
-                </div>               
-                <div class="form-group">
-                    <label class="form-label">Unidades Radiales Reportando</label>
-                    <div id="unidadesRadialesContainer" class="checkbox-container">
-                    </div>
-                </div>               
-                <div class="form-group">
-                    <label for="responsableReporte" class="form-label">Responsable que Reporta</label>
-                    <input type="text" id="responsableReporte" class="form-control" readonly placeholder="Se autocompletará según unidades seleccionadas">
-                </div>                
-                <div class="form-group">
-                    <label for="descripcionReporte" class="form-label">Descripción de la Novedad</label>
-                    <textarea id="descripcionReporte" class="form-control" rows="4" required 
-                              placeholder="Describe detalladamente la situación reportada..."></textarea>
-                </div>              
-                <div class="form-group">
-                    <label for="ubicacionReporte" class="form-label">Ubicación Específica</label>
-                    <input type="text" id="ubicacionReporte" class="form-control" 
-                           placeholder="Dirección, barrio, vereda o punto de referencia">
-                </div>              
-                <div class="modal-footer">
-                    <button type="button" class="btn btn--secondary" onclick="cerrarModalNuevoReporte()">
-                        Cancelar
-                    </button>
-                    <button type="submit" class="btn btn--primary">
-                        Guardar Reporte
-                    </button>
-                </div>
-            </form>
+    </header>
+
+    <!-- seccion hero principal -->
+    <section id="inicio" class="hero">
+        <div class="hero-background">
+            <img src="assets/images/paisaje_cafetero_quindio.jpg" alt="Paisaje Cafetero del Quindío" class="hero-image">
+            <div class="hero-overlay"></div>
         </div>
-    </div>
-    <div id="modalDetallesMunicipios" class="modal hidden">
-        <div class="modal-overlay" onclick="cerrarModalDetallesMunicipios()"></div>
-        <div class="modal-content modal-wide">
-            <div class="modal-header">
-                <h2>Unidades Radiales por Municipio</h2>
-                <button class="modal-close" onclick="cerrarModalDetallesMunicipios()">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div id="detallesMunicipiosContent">
+        <div class="hero-content">
+            <div class="container">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        <span class="title-main">SECRICA REPORT</span>
+                        <span class="title-sub">Sistema de Reportes</span>
+                    </h1>
+                    <h2 class="hero-subtitle">Defensa Civil Colombiana</h2>
+                    <p class="hero-description">
+                        Seccional Quindío - Corazón del Eje Cafetero<br>
+                        Protegiendo nuestras tradiciones y comunidades
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="login.html" class="btn btn-primary">Acceder al Sistema</a>
+                        <a href="registro.html" class="btn btn-secondary">Crear Cuenta</a>
+                    </div>
+                </div>
+                <div class="hero-icons">
+                    <img src="assets/images/palma_cera_icono.jpg" alt="Palma de Cera" class="culture-icon">
+                    <img src="assets/images/jeep_willys_icono.jpg" alt="Jeep Willys" class="culture-icon">
+                    <img src="assets/images/cafe_granos_icono.jpg" alt="Café del Quindío" class="culture-icon">
                 </div>
             </div>
         </div>
-    </div>
-    <script src="scripts/app.js"></script>
+    </section>
+
+    <!-- seccion quienes somos -->
+    <section id="quienes-somos" class="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">¿Quiénes Somos?</h2>
+                <div class="section-decoration">
+                    <img src="assets/images/palma_cera_pequena.jpg" alt="Palma de Cera" class="decoration-icon">
+                </div>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Defensa Civil Colombiana - Seccional Quindío</h3>
+                    <p>
+                        Somos la institución encargada de la gestión del riesgo de desastres en el 
+                        departamento del Quindío, tierra de la palma de cera y el mejor café del mundo[12][20]. 
+                        Nuestro compromiso es proteger a las comunidades de los 12 municipios quindianos[27], 
+                        preservando nuestras tradiciones cafeteras y el patrimonio cultural de nuestra región.
+                    </p>
+                    <div class="features">
+                        <div class="feature">
+                            <img src="assets/images/icono_emergencias.jpg" alt="Emergencias" class="feature-icon">
+                            <h4>Atención de Emergencias</h4>
+                            <p>Respuesta inmediata las 24 horas del día</p>
+                        </div>
+                        <div class="feature">
+                            <img src="assets/images/icono_prevencion.png" alt="Prevención" class="feature-icon">
+                            <h4>Gestión del Riesgo</h4>
+                            <p>Prevención y preparación comunitaria</p>
+                        </div>
+                        <div class="feature">
+                            <img src="assets/images/icono_capacitacion.jpg" alt="Capacitación" class="feature-icon">
+                            <h4>Capacitación</h4>
+                            <p>Formación en primeros auxilios y rescate</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="assets/images/voluntarios_defensa_civil.jpg" alt="Voluntarios Defensa Civil Quindío" class="main-image">
+                    <div class="image-frame"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- seccion municipios del quindio -->
+    <section id="municipios" class="municipios">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Municipios del Quindío</h2>
+                <p class="section-subtitle">Doce municipios unidos en la cultura cafetera</p>
+            </div>
+            <div class="municipios-grid">
+                <div class="municipio-card capital">
+                    <img src="assets/images/armenia_plaza_bolivar.jpg" alt="Armenia" class="municipio-image">
+                    <div class="municipio-content">
+                        <h3>Armenia</h3>
+                        <p>Capital del departamento</p>
+                        <span class="municipio-altura">1.551 m.s.n.m.</span>
+                    </div>
+                </div>
+                <div class="municipio-card">
+                    <img src="assets/images/salento_balcones_coloridos.jpg" alt="Salento" class="municipio-image">
+                    <div class="municipio-content">
+                        <h3>Salento</h3>
+                        <p>Pueblo de mil colores[25][31]</p>
+                        <span class="municipio-altura">1.895 m.s.n.m.</span>
+                    </div>
+                </div>
+                <div class="municipio-card">
+                    <img src="assets/images/calarca_parque_principal.jpg" alt="Calarcá" class="municipio-image">
+                    <div class="municipio-content">
+                        <h3>Calarcá</h3>
+                        <p>Festival Nacional del Café[32]</p>
+                        <span class="municipio-altura">1.536 m.s.n.m.</span>
+                    </div>
+                </div>
+                <div class="municipio-card">
+                    <img src="assets/images/montenegro_parque_cafe.jpg" alt="Montenegro" class="municipio-image">
+                    <div class="municipio-content">
+                        <h3>Montenegro</h3>
+                        <p>Parque del Café[17]</p>
+                        <span class="municipio-altura">1.294 m.s.n.m.</span>
+                    </div>
+                </div>
+                <div class="municipio-card">
+                    <img src="assets/images/circasia_centro.jpg" alt="Circasia" class="municipio-image">
+                    <div class="municipio-content">
+                        <h3>Circasia</h3>
+                        <p>Tierra de promisión</p>
+                        <span class="municipio-altura">1.772 m.s.n.m.</span>
+                    </div>
+                </div>
+                <div class="municipio-card">
+                    <img src="assets/images/quimbaya_parque.jpg" alt="Quimbaya" class="municipio-image">
+                    <div class="municipio-content">
+                        <h3>Quimbaya</h3>
+                        <p>Herencia indígena</p>
+                        <span class="municipio-altura">1.425 m.s.n.m.</span>
+                    </div>
+                </div>
+                <div class="municipio-card">
+                    <img src="assets/images/filandia_mirador.jpg" alt="Filandia" class="municipio-image">
+                    <div class="municipio-content">
+                        <h3>Filandia</h3>
+                        <p>Balcón del Quindío</p>
+                        <span class="municipio-altura">1.923 m.s.n.m.</span>
+                    </div>
+                </div>
+                <div class="municipio-card">
+                    <img src="assets/images/la_tebaida_centro.jpg" alt="La Tebaida" class="municipio-image">
+                    <div class="municipio-content">
+                        <h3>La Tebaida</h3>
+                        <p>Estadio del Sol</p>
+                        <span class="municipio-altura">1.190 m.s.n.m.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="municipios-adicionales">
+                <div class="municipio-mini">
+                    <span>Córdoba</span>
+                    <small>1.700 m.s.n.m.</small>
+                </div>
+                <div class="municipio-mini">
+                    <span>Génova</span>
+                    <small>1.596 m.s.n.m.</small>
+                </div>
+                <div class="municipio-mini">
+                    <span>Pijao</span>
+                    <small>1.700 m.s.n.m.</small>
+                </div>
+                <div class="municipio-mini">
+                    <span>Buenavista</span>
+                    <small>1.447 m.s.n.m.</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- seccion cultura cafetera -->
+    <section id="cultura" class="cultura">
+        <div class="cultura-background">
+            <img src="assets/images/fondo_cultura_cafetera.jpg" alt="Cultura Cafetera" class="background-image">
+            <div class="cultura-overlay"></div>
+        </div>
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title white">Nuestra Cultura Cafetera</h2>
+                <p class="section-subtitle white">Patrimonio de la Humanidad - UNESCO</p>
+            </div>
+            <div class="cultura-elements">
+                <div class="cultura-item">
+                    <img src="assets/images/traje_chapolera_completo.jpg" alt="Traje de Chapolera" class="cultura-image">
+                    <h3>Traje de Chapolera</h3>
+                    <p>Símbolo de la mujer cafetera quindiana[19]</p>
+                </div>
+                <div class="cultura-item">
+                    <img src="assets/images/jeep_willys_tradicional.jpg" alt="Jeep Willys" class="cultura-image">
+                    <h3>Jeep Willys</h3>
+                    <p>Icono del transporte cafetero[26]</p>
+                </div>
+                <div class="cultura-item">
+                    <img src="assets/images/palma_cera_valle_cocora.jpg" alt="Palma de Cera" class="cultura-image">
+                    <h3>Palma de Cera</h3>
+                    <p>Árbol nacional de Colombia[12][14]</p>
+                </div>
+                <div class="cultura-item">
+                    <img src="assets/images/cafe_premium_quindio.jpg" alt="Café del Quindío" class="cultura-image">
+                    <h3>Café Premium</h3>
+                    <p>El mejor café suave del mundo[20]</p>
+                </div>
+                <div class="cultura-item">
+                    <img src="assets/images/bambuco_danza_tradicional.jpg" alt="Bambuco" class="cultura-image">
+                    <h3>Bambuco</h3>
+                    <p>Música y danza tradicional[34]</p>
+                </div>
+                <div class="cultura-item">
+                    <img src="assets/images/arquitectura_colonial_quindio.jpg" alt="Arquitectura Colonial" class="cultura-image">
+                    <h3>Arquitectura Colonial</h3>
+                    <p>Balcones y fachadas coloridas[18][31]</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- seccion servicios -->
+    <section id="servicios" class="servicios">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Nuestros Servicios</h2>
+                <p class="section-subtitle">Comprometidos con la seguridad de nuestras comunidades</p>
+            </div>
+            <div class="servicios-grid">
+                <div class="servicio-card">
+                    <div class="servicio-icon">🚨</div>
+                    <h3>Atención de Emergencias</h3>
+                    <p>Respuesta inmediata ante desastres naturales, accidentes e incidentes que requieran intervención especializada.</p>
+                </div>
+                <div class="servicio-card">
+                    <div class="servicio-icon">⛰️</div>
+                    <h3>Gestión del Riesgo</h3>
+                    <p>Prevención y mitigación de riesgos en zonas vulnerables, especialmente en áreas cafeteras montañosas.</p>
+                </div>
+                <div class="servicio-card">
+                    <div class="servicio-icon">🚑</div>
+                    <h3>Primeros Auxilios</h3>
+                    <p>Atención médica prehospitalaria y estabilización de pacientes en situaciones de emergencia.</p>
+                </div>
+                <div class="servicio-card">
+                    <div class="servicio-icon">🎓</div>
+                    <h3>Capacitación</h3>
+                    <p>Formación comunitaria en prevención de desastres, primeros auxilios y autoprotección.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- seccion contacto mejorada -->
+    <section id="contacto" class="contacto">
+        <div class="contacto-background">
+            <img src="assets/images/palmadesera.jpg" alt="Palma de Cera" class="background-image">
+            <div class="contacto-overlay"></div>
+        </div>
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title white">Contacto</h2>
+                <p class="section-subtitle white">Defensa Civil Colombiana - Seccional Quindío</p>
+            </div>
+            <div class="contacto-content">
+                <div class="contacto-info">
+                    <div class="info-card">
+                        <h3>Información de Contacto</h3>
+                        <div class="info-item">
+                            <span class="icon">📍</span>
+                            <div>
+                                <strong>Dirección:</strong>
+                                <p>Calle 18 # 12-45, Armenia, Quindío, Colombia</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <span class="icon">📞</span>
+                            <div>
+                                <strong>Línea de Emergencia:</strong>
+                                <p>123 (Disponible 24/7)</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <span class="icon">✉️</span>
+                            <div>
+                                <strong>Correo Electrónico:</strong>
+                                <p>info@defensacivilquindio.gov.co</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <span class="icon">🌐</span>
+                            <div>
+                                <strong>Sistema de Reportes:</strong>
+                                <p>SECRICA REPORT - Disponible las 24 horas</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contacto-form">
+                    <div class="form-card">
+                        <h3>Envíanos un Mensaje</h3>
+                        <form id="contactoForm">
+                            <div class="form-group">
+                                <input type="text" id="nombreContacto" placeholder="Nombre completo" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="emailContacto" placeholder="Correo electrónico" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" id="telefonoContacto" placeholder="Teléfono">
+                            </div>
+                            <div class="form-group">
+                                <select id="municipioContacto" required>
+                                    <option value="">Seleccionar municipio</option>
+                                    <option value="armenia">Armenia</option>
+                                    <option value="salento">Salento</option>
+                                    <option value="calarca">Calarcá</option>
+                                    <option value="montenegro">Montenegro</option>
+                                    <option value="circasia">Circasia</option>
+                                    <option value="quimbaya">Quimbaya</option>
+                                    <option value="filandia">Filandia</option>
+                                    <option value="la-tebaida">La Tebaida</option>
+                                    <option value="cordoba">Córdoba</option>
+                                    <option value="genova">Génova</option>
+                                    <option value="pijao">Pijao</option>
+                                    <option value="buenavista">Buenavista</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <textarea id="mensajeContacto" placeholder="Mensaje" rows="4" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-full-width">Enviar Mensaje</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SECRICA REPORT</h3>
+                    <p>Sistema de Reportes de la Defensa Civil Colombiana - Seccional Quindío</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">Facebook</a>
+                        <a href="#" class="social-link">Twitter</a>
+                        <a href="#" class="social-link">Instagram</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="login.html">Iniciar Sesión</a></li>
+                        <li><a href="registro.html">Crear Cuenta</a></li>
+                        <li><a href="#municipios">Municipios</a></li>
+                        <li><a href="#servicios">Servicios</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Recursos</h4>
+                    <ul>
+                        <li><a href="#cultura">Cultura Cafetera</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                        <li><a href="#">Documentación</a></li>
+                        <li><a href="#">Ayuda</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 SECRICA REPORT - Defensa Civil Colombiana. Proyecto académico desarrollado por Cristopher Bueno, Sebastian Pinilla y equipo.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts/inicio.js"></script>
+    <script src="scripts/crypto-utils.js"></script>
+    <script src="scripts/utilidades.js"></script>
+    <script src="scripts/chatbot-ia.js"></script>
+    <script src="scripts/login.js"></script>
 </body>
 </html>
