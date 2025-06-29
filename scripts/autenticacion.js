@@ -1,8 +1,4 @@
-/**
- * SECRICA REPORT - Sistema de Autenticación
- * Manejo seguro de login, registro y sesiones
- * @author Cristopher Bueno, Sebastian Pinilla
- */
+import { verificarContrasena as verificarContrasenaCifrada } from './crypto-utils.js';
 
 class SistemaAutenticacion {
     constructor() {
@@ -127,20 +123,9 @@ class SistemaAutenticacion {
      * Obtiene todos los usuarios del sistema
      */
     async obtenerTodosUsuarios() {
-        try {
-            // Intentar obtener usuarios del servidor
-            const respuesta = await fetch('http://localhost:3000/api/usuarios');
-            if (respuesta.ok) {
-                const datos = await respuesta.json();
-                return [...this.usuariosPredefinidos, ...datos.usuarios];
-            }
-        } catch (error) {
-            console.log('Servidor no disponible, usando datos locales');
-        }
-
-        // Fallback a usuarios locales
-        const usuariosLocales = JSON.parse(localStorage.getItem('secrica_usuarios') || '[]');
-        return [...this.usuariosPredefinidos, ...usuariosLocales];
+        const usuaruiosLocales = JSON.parse(localStorage.getItem('secrica_usuarios') || '[]');
+        console.log("Usuarios cargados desde LocalStorage:", usuaruiosLocales);
+        return [...usuariosLocales];
     }
 
     /**
@@ -157,15 +142,14 @@ class SistemaAutenticacion {
      * Verifica las credenciales del usuario
      */
     verificarCredenciales(contrasenaIngresada, contrasenaAlmacenada) {
-        // Si hay función de verificación de cifrado disponible, usarla
-        if (typeof verificarContrasena === 'function') {
-            return verificarContrasena(contrasenaIngresada, contrasenaAlmacenada);
-        }
-        
-        // Fallback para contraseñas sin cifrar
-        return contrasenaIngresada === contrasenaAlmacenada;
-    }
+        try {
+            return verificarContrasenaCifrada(contrasenaIngresada, contrasenaAlmacenada);
+        } catch (error) {
+            console.warn('⚠️ Fallo al usar verificación cifrada, usando fallback:', error);
+            return contrasenaIngresada === contrasenaAlmacenada;
+        }   
 
+    }
     /**
      * Crea una nueva sesión de usuario
      */
