@@ -1,32 +1,32 @@
-// incluimos localStorage y cifrado de contraseñas
-
-import { verificarContrasena } from '../utils/crypto-utils.js';
-
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
     console.log('sistema de login cargado');
     initLoginForm();
     cargarUltimoEmail();
     verificarSesionActiva();
 });
 
+// Inicia el formulario de login
 function initLoginForm() {
     const form = document.getElementById('loginForm');
     if (!form) {
-        console.error('formulario de login no encontrado');
+        console.error('Formulario de login no encontrado');
         return;
     }
 
-    form.addEventListener('submit', function(e) {
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        procesarLogin();
+        await procesarLogin();
     });
 
     const emailInput = document.getElementById('email');
-    emailInput.addEventListener('input', function() {
-        guardarEmailTemporal(this.value);
-    });
+    if (emailInput) {
+        emailInput.addEventListener('input', () => {
+            guardarEmailTemporal(emailInput.value);
+        });
+    }
 }
 
+// Procesa el login
 async function procesarLogin() {
     const email = document.getElementById('email').value.trim().toLowerCase();
     const password = document.getElementById('password').value;
@@ -45,7 +45,7 @@ async function procesarLogin() {
         const usuarios = await obtenerTodosLosUsuarios();
         console.log('usuarios disponibles:', usuarios.length);
 
-        const usuario = usuarios.find(u => 
+        const usuario = usuarios.find(u =>
             (u.email && u.email.toLowerCase() === email) || 
             (u.username && u.username.toLowerCase() === email)
         );
@@ -60,8 +60,7 @@ async function procesarLogin() {
             return;
         }
 
-        const passwordValida = await verificarPasswordUsuario(password, usuario.password);
-
+        const passwordValida = await verificarContrasena(password, usuario.password);
         if (!passwordValida) {
             mostrarMensaje('Contraseña incorrecta', 'error');
             return;
@@ -76,30 +75,28 @@ async function procesarLogin() {
         }, 1500);
 
     } catch (error) {
-        console.error('error en login:', error);
+        console.error('Error en login:', error);
         mostrarMensaje('Error del sistema. Intenta de nuevo', 'error');
     }
 }
 
+// SE CARGAN USUARIOS DESDE EL LOCAL                         MODO SIN BACKEND POR EL MOMENTO
+// Cargar usuarios desde archivo JSON local
 async function obtenerTodosLosUsuarios() {
     try {
-        const response = await fetch("http://localhost:3000/api/usuarios");
+        const response = await fetch("usuarios.json");
         const data = await response.json();
+        console.log("Usuarios cargados desde archivo:", data.usuarios);
         return data.usuarios || [];
     } catch (error) {
-        console.error('error al cargar usuarios desde servidor:', error);
+        console.error('Error al cargar usuarios desde archivo JSON:', error);
         return [];
     }
 }
 
-async function verificarPasswordUsuario(passwordPlano, passwordAlmacenado) {
-    if (typeof verificarContrasena === 'function') {
-        return verificarContrasena(passwordPlano, passwordAlmacenado);
-    } else {
-        return passwordPlano === passwordAlmacenado;
-    }
-}
 
+
+// Guarda sesión del usuario
 function guardarSesionUsuario(usuario) {
     try {
         const sesion = {
@@ -114,45 +111,47 @@ function guardarSesionUsuario(usuario) {
 
         localStorage.setItem('secrica_sesion', JSON.stringify(sesion));
         sessionStorage.setItem('secrica_sesion_temp', JSON.stringify(sesion));
-
-        console.log('sesion guardada para:', usuario.username);
+        console.log('Sesión guardada para:', usuario.username);
 
     } catch (error) {
-        console.error('error al guardar sesion:', error);
+        console.error('Error al guardar sesión:', error);
     }
 }
 
-function cargarUltimoEmail() {
-    try {
-        const ultimoEmail = localStorage.getItem('secrica_ultimo_email');
-        const emailInput = document.getElementById('email');
-
-        if (ultimoEmail && emailInput) {
-            emailInput.value = ultimoEmail;
-        }
-    } catch (error) {
-        console.error('error al cargar ultimo email:', error);
-    }
-}
-
+// Guarda último correo en localStorage
 function guardarUltimoEmail(email) {
     try {
         localStorage.setItem('secrica_ultimo_email', email);
     } catch (error) {
-        console.error('error al guardar email:', error);
+        console.error('Error al guardar email:', error);
     }
 }
 
+// Carga último correo al campo
+function cargarUltimoEmail() {
+    try {
+        const ultimoEmail = localStorage.getItem('secrica_ultimo_email');
+        const emailInput = document.getElementById('email');
+        if (ultimoEmail && emailInput) {
+            emailInput.value = ultimoEmail;
+        }
+    } catch (error) {
+        console.error('Error al cargar último email:', error);
+    }
+}
+
+// Guarda correo temporal en sessionStorage
 function guardarEmailTemporal(email) {
     try {
         if (email && email.length > 3) {
             sessionStorage.setItem('secrica_email_temp', email);
         }
     } catch (error) {
-        console.error('error al guardar email temporal:', error);
+        console.error('Error al guardar email temporal:', error);
     }
 }
 
+// Verifica si hay sesión activa reciente
 function verificarSesionActiva() {
     try {
         const sesion = localStorage.getItem('secrica_sesion');
@@ -169,10 +168,11 @@ function verificarSesionActiva() {
             }
         }
     } catch (error) {
-        console.error('error al verificar sesion:', error);
+        console.error('Error al verificar sesión activa:', error);
     }
 }
 
+// Muestra opción para continuar sesión activa
 function mostrarOpcionContinuarSesion(sesion) {
     const contenedor = document.querySelector('.login-card');
     if (!contenedor) return;
@@ -198,6 +198,7 @@ function mostrarOpcionContinuarSesion(sesion) {
     contenedor.insertBefore(divSesion, form);
 }
 
+// Continúa sesión activa
 function continuarSesion() {
     mostrarMensaje('Continuando sesión...', 'exito');
     setTimeout(() => {
@@ -205,6 +206,7 @@ function continuarSesion() {
     }, 1000);
 }
 
+// Cierra sesión anterior
 function cerrarSesionAnterior() {
     localStorage.removeItem('secrica_sesion');
     sessionStorage.removeItem('secrica_sesion_temp');
@@ -217,12 +219,14 @@ function cerrarSesionAnterior() {
     mostrarMensaje('Sesión anterior cerrada', 'info');
 }
 
+// Valida formato del email
 function validarEmail(email) {
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return regex.test(email);
 }
 
-function mostrarMensaje(mensaje, tipo = 'info') {
+// Muestra mensaje en pantalla
+function mostrarMensaje(texto, tipo = 'info') {
     let mensajeElement = document.getElementById('mensajeLogin');
 
     if (!mensajeElement) {
@@ -236,7 +240,7 @@ function mostrarMensaje(mensaje, tipo = 'info') {
         }
     }
 
-    mensajeElement.textContent = mensaje;
+    mensajeElement.textContent = texto;
     mensajeElement.className = `mensaje mensaje--${tipo}`;
     mensajeElement.classList.remove('hidden');
 
@@ -245,97 +249,6 @@ function mostrarMensaje(mensaje, tipo = 'info') {
     }, 5000);
 }
 
+// Exportar funciones al window para usar desde HTML
 window.continuarSesion = continuarSesion;
 window.cerrarSesionAnterior = cerrarSesionAnterior;
-
-console.log('sistema de login inicializado correctamente');
-
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('sistema de login cargado');
-    initLoginForm();
-});
-
-function initLoginForm() {
-    const form = document.getElementById('loginForm');
-    if (!form) {
-        console.error('formulario de login no encontrado');
-        return;
-    }
-
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        await procesarLogin();
-    });
-}
-
-async function procesarLogin() {
-    const email = document.getElementById('email').value.trim().toLowerCase();
-    const password = document.getElementById('password').value;
-    const mensaje = document.getElementById('mensajeLogin');
-
-    if (!email || !password) {
-        mostrarMensaje('Por favor ingresa email y contraseña', 'error');
-        return;
-    }
-
-    try {
-        const response = await fetch("http://localhost:3000/api/usuarios");
-        const data = await response.json();
-        const usuarios = data.usuarios || [];
-
-        const usuario = usuarios.find(u =>
-            u.email.toLowerCase() === email || u.username.toLowerCase() === email
-        );
-
-        if (!usuario) {
-            mostrarMensaje('Usuario no encontrado', 'error');
-            return;
-        }
-
-        if (!usuario.activo) {
-            mostrarMensaje('Cuenta desactivada', 'error');
-            return;
-        }
-
-        if (usuario.password !== password) {
-            mostrarMensaje('Contraseña incorrecta', 'error');
-            return;
-        }
-
-        // Guardar sesión
-        const sesion = {
-            id: usuario.id,
-            username: usuario.username,
-            email: usuario.email,
-            fullName: usuario.fullName,
-            rol: usuario.rol,
-            fechaLogin: new Date().toISOString(),
-        };
-
-        localStorage.setItem('secrica_sesion', JSON.stringify(sesion));
-
-        mostrarMensaje('Login exitoso. Redirigiendo...', 'exito');
-
-        setTimeout(() => {
-            window.location.href = 'sistema.html';
-        }, 1500);
-
-    } catch (error) {
-        console.error('error en login:', error);
-        mostrarMensaje('Error al conectar con el servidor', 'error');
-    }
-}
-
-function mostrarMensaje(texto, tipo = 'info') {
-    let mensajeElement = document.getElementById('mensajeLogin');
-
-    if (!mensajeElement) {
-        mensajeElement = document.createElement('div');
-        mensajeElement.id = 'mensajeLogin';
-        mensajeElement.className = 'mensaje';
-        document.body.appendChild(mensajeElement);
-    }
-
-    mensajeElement.textContent = texto;
-    mensajeElement.className = `mensaje mensaje--${tipo}`;
-}
