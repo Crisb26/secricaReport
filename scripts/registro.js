@@ -1,4 +1,4 @@
-import { hashearContrasena } from '../utils/crypto-utils.js';
+import { verificarContrasena } from './crypto-utils.js';
 
 document.addEventListener('DOMContentLoaded', function() {
     initRegistroForm();
@@ -47,7 +47,7 @@ function procesarRegistro() {
     }
 
     // verificar duplicado
-    const usuarios = JSON.parse(localStorage.getItem('secrica_users')||'[]');
+    const usuarios = JSON.parse(localStorage.getItem('secrica_usuarios')||'[]');
     if (usuarios.some(u=>u.email===email)) {
         mostrarMensajeRegistro('este correo ya esta registrado','error');
         return;
@@ -71,7 +71,7 @@ function procesarRegistro() {
         fechaRegistro: new Date().toISOString()
     };
     usuarios.push(nuevo);
-    localStorage.setItem('secrica_users', JSON.stringify(usuarios));
+    localStorage.setItem('secrica_usuarios', JSON.stringify(usuarios));
 
     mostrarMensajeRegistro('¡cuenta creada con exito! redirigiendo...','exito');
     setTimeout(()=> window.location.href='login.html?email='+encodeURIComponent(email),2000);
