@@ -1,7 +1,7 @@
 // cifrado de contraseñas del lado del cliente
 export function verificarContrasena(passwordPlano, passwordHash) {
     // Tu lógica aquí
-
+}
 
 const SALT_ROUNDS = 10;
 
@@ -132,10 +132,7 @@ export async function hashearContrasena(passwordPlano) {
 
 // Verifica contraseña
 export async function verificarContrasena(passwordPlano, hashAlmacenado) {
-  return bcrypt.compare(passwordPlano, hashAlmacenado);
+    return bcrypt.compare(passwordPlano, hashAlmacenado);
 }
 
 console.log('sistema de cifrado secrica cargado correctamente');
-
-
-}
