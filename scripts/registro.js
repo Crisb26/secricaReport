@@ -1,4 +1,4 @@
-import { verificarContrasena } from './crypto-utils.js';
+import { cifrarPassword } from './crypto-utils.js';
 
 document.addEventListener('DOMContentLoaded', function() {
     initRegistroForm();
@@ -92,11 +92,4 @@ function cargarEmailTemporal() {
     const params = new URLSearchParams(window.location.search);
     const email = params.get('email')||sessionStorage.getItem('secrica_email_temp');
     if (email) document.getElementById('email').value=email;
-}
-
-function cifrarPassword(p) {
-    // usa funcion importada de crypto-utils.js
-    return typeof window.cifrarPassword==='function'
-        ? window.cifrarPassword(p)
-        : btoa(p);
 }
