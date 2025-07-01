@@ -122,10 +122,11 @@ function procesarFormularioContacto() {
         return;
     }
     
-    if (!validarEmail(email)) {
-        mostrarNotificacion('Formato de email inválido', 'error');
-        return;
+    if (!window.utilidadessecrica.validaremail(email)) { // ✅ Esto sí funciona
+  mostrarMensaje('Email inválido', 'error');
+  return;
     }
+
     
     // crear objeto de contacto
     const contacto = {

@@ -10,8 +10,8 @@ async function mostrarPronosticoConIA(ciudad) {
 
 class ClimaIA {
     constructor() {
-        this.apiKey = 'TU_API_KEY_OPENWEATHERMAP'; // obtener gratis en openweathermap.org
-        this.baseUrl = 'https://api.openweathermap.org/data/2.5';
+        this.apiKey = 'a526c94ff9288dd58d862bd55e814015'; 
+        this.baseUrl = 'https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}';
         this.locationQuindio = {
             armenia: { lat: 4.5389, lon: -75.6819 },
             salento: { lat: 4.6308, lon: -75.5683 },

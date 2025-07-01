@@ -1,4 +1,5 @@
-import { verificarContrasena as verificarContrasenaCifrada } from './crypto-utils.js';
+const valido = verificarContrasenaAvanzada(password, hash);
+
 
 class SistemaAutenticacion {
     constructor() {

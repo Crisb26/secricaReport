@@ -96,6 +96,16 @@
     text-decoration: underline;
 }
 
+input[type="checkbox"] {
+  transform: scale(1.2);
+  margin-right: 8px;
+}
+
+label[for="terminos"] {
+  font-size: 0.9rem;
+  color: #444;
+}
+
 @media (max-width: 768px) {
     .form-row {
         grid-template-columns: 1fr;

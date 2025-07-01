@@ -80,12 +80,9 @@
                         <input type="password" id="confirmpassword" class="form-control" required>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="checkbox-container">
-                        <input type="checkbox" id="terminos" required>
-                        <span class="checkmark"></span>
-                        Acepto los términos y condiciones del sistema SECRICA REPORT
-                    </label>
+                <div>
+                    <input type="checkbox" id="terminos" name="terminos" required>
+                    <label for="terminos">Acepto los términos y condiciones</label>
                 </div>
                 <button type="submit" class="btn btn--primary btn--full-width">
                     Crear Cuenta
@@ -100,9 +97,9 @@
     </div>
     
 <script type="module" src="scripts/registro.js"></script>
-<script src="scripts/clima-ia.js"></script>
-<script src="scripts/seguimiento-ia.js"></script>
-<script src="scripts/chatbot-ia.js"></script>
+<script type="module" src="scripts/clima-ia.js"></script>
+<script type="module" src="scripts/seguimiento-ia.js"></script>
+<script type="module" src="scripts/chatbot-ia.js"></script>
 
     
 </body>

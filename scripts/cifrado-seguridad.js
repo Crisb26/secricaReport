@@ -1,6 +1,4 @@
-/**
- * Sistema de Cifrado y Seguridad
- */
+window.verificarContrasenaAvanzada = verificarContrasenaAvanzada;
 
 class SistemaCifradoSecrica {
     constructor() {
@@ -54,36 +52,34 @@ class SistemaCifradoSecrica {
      * @param {string} hashAlmacenado - Hash almacenado en la base de datos
      * @returns {boolean} True si coincide
      */
-    verificarContrasena(contrasenaPlana, hashAlmacenado) {
-        try {
-            // Verificar formato de contraseña cifrada
-            if (!hashAlmacenado.startsWith('SECRICA_')) {
-                // Contraseña legacy sin cifrar (compatibilidad)
-                return contrasenaPlana === hashAlmacenado;
-            }
-
-            // Extraer componentes del hash
-            const partes = hashAlmacenado.split('_');
-            if (partes.length !== 4) return false;
-
-            const hashOriginal = partes[1];
-            const salt = partes[2];
-            const timestamp = partes[3];
-
-            // Recrear el hash con los mismos parámetros
-            const datosCompletos = salt + contrasenaPlana + timestamp + this.claveSecreta;
-            let hashRecreado = this.hashSimple(datosCompletos);
-            
-            for (let i = 0; i < this.iteracionesCifrado; i++) {
-                hashRecreado = this.hashSimple(hashRecreado + salt + i);
-            }
-
-            return hashRecreado === hashOriginal;
-        } catch (error) {
-            console.error('Error al verificar contraseña:', error);
-            return false;
+    
+    verificarContrasenaAvanzada(contrasenaPlana, hashAlmacenado) {
+    try {
+        if (!hashAlmacenado.startsWith('SECRICA_')) {
+            return contrasenaPlana === hashAlmacenado;
         }
+
+        const partes = hashAlmacenado.split('_');
+        if (partes.length !== 4) return false;
+
+        const hashOriginal = partes[1];
+        const salt = partes[2];
+        const timestamp = partes[3];
+
+        const datosCompletos = salt + contrasenaPlana + timestamp + this.claveSecreta;
+        let hashRecreado = this.hashSimple(datosCompletos);
+
+        for (let i = 0; i < this.iteracionesCifrado; i++) {
+            hashRecreado = this.hashSimple(hashRecreado + salt + i);
+        }
+
+        return hashRecreado === hashOriginal;
+    } catch (error) {
+        console.error('Error al verificar contraseña:', error);
+        return false;
     }
+}
+
 
     /**
      * Genera un hash simple pero efectivo
@@ -204,8 +200,8 @@ function cifrarContrasena(contrasena) {
     return sistemaCifrado.cifrarContrasena(contrasena);
 }
 
-function verificarContrasena(contrasenaPlana, hashAlmacenado) {
-    return sistemaCifrado.verificarContrasena(contrasenaPlana, hashAlmacenado);
+function verificarContrasenaAvanzada(contrasenaPlana, hashAlmacenado) {
+    return sistemaCifrado.verificarContrasenaAvanzada(contrasenaPlana, hashAlmacenado);
 }
 
 function generarTokenSesion(datosUsuario) {
