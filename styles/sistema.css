@@ -1,13 +1,17 @@
+body{
+    background-color: #fff;
+}
 .sistema-container {
+    color: var(--color-texto, #f57c00);
     min-height: 100vh;
     background: var(--beige-colonial);
 }
 
 /* header del sistema */
 .sistema-header {
+    padding: 10px 20px;
     background: linear-gradient(135deg, var(--azul-dc), var(--verde-palma));
     color: var(--blanco);
-    padding: var(--espaciado-sm);
     box-shadow: var(--sombra-media);
 }
 
@@ -16,6 +20,7 @@
     justify-content: space-between;
     align-items: center;
     max-width: 1200px;
+    height: 12vh;
     margin: 0 auto;
 }
 
@@ -26,30 +31,39 @@
 }
 
 .logo-img {
-    width: 50px;
-    height: 50px;
+    width: 90px;
+    height: 80px;
     border-radius: 50%;
     object-fit: cover;
 }
 
 .logo-text h1 {
+    padding-left: 41px;
+    color: #f57c00;
     font-size: 1.5rem;
     margin: 0;
 }
 
 .logo-text p {
-    font-size: 0.9rem;
+    padding-left: 41px;
+    color: #f57c00;
+    font-size: 1.5rem;
     margin: 0;
     opacity: 0.9;
+    
 }
 
 .user-info {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    flex-direction: column;
     gap: var(--espaciado-sm);
+    font-size: 20px;
+    padding: 40px;
 }
 
 .btn-logout {
+    display: flex;
     background: var(--naranja-dc);
     border: none;
     padding: var(--espaciado-xs) var(--espaciado-sm);
@@ -57,6 +71,9 @@
     color: var(--blanco);
     cursor: pointer;
     transition: all 0.3s ease;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
 }
 
 .btn-logout:hover {
@@ -81,6 +98,7 @@
 
 .nav-btn {
     background: none;
+    font-size: 25px;
     border: 2px solid var(--azul-dc);
     padding: var(--espaciado-xs) var(--espaciado-sm);
     border-radius: 25px;
@@ -89,6 +107,7 @@
     white-space: nowrap;
     transition: all 0.3s ease;
     font-weight: 500;
+    margin-right: 20px;
 }
 
 .nav-btn:hover,
@@ -114,6 +133,50 @@
 }
 
 /* dashboard */
+.seccion.active h2{
+   color: #f57c00; 
+}
+
+.usuario-card h4 {
+    color: #f57c00;
+}
+
+.usuarios-header h3 {
+    color: #f57c00;
+}
+
+.seguimiento-stats h3 {
+    color: #f57c00;
+}
+
+.analisis-ia-container h4 {
+    color: #f57c00;
+}
+
+.recomendaciones-ia h5 {
+    color: #f57c00;
+}
+
+.clima-actual h3 {
+    color: #f57c00;
+}
+
+.clima-info h4 {
+    color: #f57c00;
+}
+
+.clima-prediccion h3 {
+    color: #f57c00;
+}
+
+.prediccion-container h4 {
+    color: #f57c00;
+}
+
+.reportes-header h3 {
+    color: #f57c00;
+}
+
 .dashboard-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
