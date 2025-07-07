@@ -281,12 +281,27 @@ function nuevoReporte() {
 }
 
 function cerrarSesion() {
-    if (confirm('¿Estás seguro que deseas cerrar sesión?')) {
-        localStorage.removeItem('secrica_sesion');
-        sessionStorage.removeItem('secrica_sesion_temp');
-        window.location.href = 'login.html';
-    }
+    // Mostrar el modal
+    document.getElementById('modalCerrarSesion').style.display = 'flex';
 }
+
+// Manejo de botones del modal
+document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('modalCerrarSesion');
+    const btnConfirmar = document.getElementById('btnConfirmarCerrar');
+    const btnCancelar = document.getElementById('btnCancelarCerrar');
+
+    if (btnConfirmar && btnCancelar && modal) {
+        btnConfirmar.onclick = function() {
+            localStorage.removeItem('secrica_sesion');
+            sessionStorage.removeItem('secrica_sesion_temp');
+            window.location.href = 'login.html';
+        };
+        btnCancelar.onclick = function() {
+            modal.style.display = 'none';
+        };
+    }
+});
 
 // funciones globales
 window.nuevoReporte = nuevoReporte;
