@@ -14,6 +14,18 @@
     <link rel="preconnect" href="https://fonts.gstatic.com"  crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
+
+<!-- script para activar pagina de mantenimiento-->
+<script>
+  // true para activarlo
+  var mantenimientoActivo = true; 
+
+  if (mantenimientoActivo && window.location.pathname.indexOf('paginabackup.html') === -1) {
+    window.location.href = 'templates/paginabackup.html';
+  }
+</script>
+
+
 <body>
     <!-- navegacion principal -->
     <header class="navbar">
