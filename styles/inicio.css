@@ -9,7 +9,6 @@
     --rojo-tradicional: #dc143c;
     --verde-montana: #355e3b;
     --beige-colonial: #f5f5dc;
-    --blanco: #ffffff;
     --negro: #2c2c2c;
     
     /* fuentes */
@@ -74,8 +73,8 @@ body {
 }
 
 .nav-brand .logo {
-    width: 50px;
-    height: 50px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     object-fit: cover;
 }
@@ -90,7 +89,7 @@ body {
 .nav-menu {
     display: flex;
     align-items: center;
-    gap: var(--espaciado-md);
+    gap: 2rem;
 }
 
 .nav-link {
@@ -205,7 +204,7 @@ body {
 .title-sub {
     display: block;
     font-size: 2.5rem;
-    color: var(--blanco);
+    color:#003f7f;
 }
 
 .hero-subtitle {
@@ -215,6 +214,7 @@ body {
 }
 
 .hero-description {
+    color: #ffff;
     font-size: 1.2rem;
     margin-bottom: var(--espaciado-lg);
     opacity: 0.9;
@@ -251,14 +251,15 @@ body {
 }
 
 .btn-secondary {
-    background: transparent;
-    color: var(--blanco);
-    border: 2px solid var(--blanco);
+    background: var(--naranja-dc);
+    color: var(--negro);
+    transform: translateY(-3px); 
+    border: 2px solid var(--naranja-dc);
 }
 
 .btn-secondary:hover {
     background: var(--blanco);
-    color: var(--azul-dc);
+    color: var(--naranja-dc);
     transform: translateY(-3px);
 }
 
@@ -298,7 +299,7 @@ body {
 }
 
 .section-title.white {
-    color: var(--blanco);
+    color: #ff6a00;
 }
 
 .section-title::after {
@@ -320,12 +321,10 @@ body {
 }
 
 .section-subtitle.white {
-    color: var(--beige-colonial);
+    color: #ff6a00;
 }
 
 .decoration-icon {
-    width: 40px;
-    height: 40px;
     margin: var(--espaciado-sm) auto;
     opacity: 0.7;
 }
@@ -622,7 +621,7 @@ body {
 /* footer */
 .footer {
     background: var(--cafe-oscuro);
-    color: var(--blanco);
+    color: #ffff;
     padding: var(--espaciado-xl) 0 var(--espaciado-sm);
 }
 
@@ -675,12 +674,14 @@ body {
 }
 
 .footer-bottom {
-    border-top: 1px solid var(--cafe-claro);
-    padding-top: var(--espaciado-sm);
-    text-align: center;
-    color: var(--beige-colonial);
-    font-size: 0.9rem;
+ margin-top: auto;
+  text-align: center;
+  font-size: 0.9rem;
+  color: white;
+  position: relative;
+  right: 350px;
 }
+
 
 /* responsive design */
 @media (max-width: 768px) {
@@ -797,3 +798,88 @@ html {
 .municipio-card:hover::before {
     opacity: 0.1;
 }
+
+
+/*formulario estilos*/
+/* Contenedor principal que alinea los elementos en fila */
+.contenedor-principal {
+  display: flex;
+  justify-content: flex-end; /* Alinea al final (derecha) */
+  padding: 20px;
+}
+
+/* Estilo del formulario */
+.contenedor {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 40px;
+  height: 150px; 
+}
+
+/* Espacio a la izquierda, opcional */
+.espacio-izquierdo {
+  flex: 1;
+}
+
+/* Formulario alineado a la derecha */
+.contacto-form {
+  width: 100%;
+  max-width: 400px;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: relative;
+  top: -390px;
+}
+
+.form-card h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.btn-full-width {
+  width: 100%;
+  padding: 10px;
+  background-color: #ff6600; /* naranja */
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-full-width:hover {
+  background-color: #e65c00;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
