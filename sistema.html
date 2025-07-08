@@ -68,14 +68,11 @@
 
             <!-- Reportes -->
             <section id="reportes" class="seccion">
-                <h2>Gestión de Reportes</h2>
-                <div class="reportes-container">
-                    <button class="btn btn-primary" onclick="nuevoReporte()">+ Nuevo Reporte</button>
-                    <div class="reportes-lista" id="listaReportes">
-                        <!-- Reportes se cargan dinámicamente -->
-                    </div>
-                </div>
-            </section>
+            <h2>Gestión de Reportes</h2>
+            <div class="reportes-container">
+                <div class="reportes-lista" id="listaReportes"></div>  <!-- los reportes se cargarian dinamicamente aqui -->
+            </div>
+        </section>
 
             <!-- Clima IA -->
             <section id="clima" class="seccion">
@@ -119,15 +116,98 @@
         </main>
     </div>
 
+    <!-- Modal de cierre de sesión -->
+    <div id="modalCerrarSesion" class="modal">
+    <div class="modal-content">
+        <h3>¿Estás seguro que deseas cerrar sesión?</h3>
+        <div class="modal-actions">
+        <button id="btnConfirmarCerrar" class="btn btn-danger">Cerrar sesión</button>
+        <button id="btnCancelarCerrar" class="btn btn-secondary">Cancelar</button>
+        </div>
+    </div>
+    </div>
+
+    <!-- Modal para Nuevo Reporte -->
+    <div id="modalNuevoReporte" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Nuevo Reporte de Emergencia</h2>
+                <button class="modal-close" onclick="cerrarModalNuevoReporte()">&times;</button>
+            </div>
+            <form id="formNuevoReporte" class="modal-body">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fechaHoraReporte" class="form-label">Fecha y Hora</label>
+                        <input type="datetime-local" id="fechaHoraReporte" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tipoEmergencia" class="form-label">Tipo de Emergencia</label>
+                        <select id="tipoEmergencia" class="form-control" required>
+                            <option value="">Seleccionar tipo</option>
+                            <option value="Incendio Forestal">🔥 Incendio Forestal</option>
+                            <option value="Incendio Estructural">🏠 Incendio Estructural</option>
+                            <option value="Deslizamiento">🏔️ Deslizamiento</option>
+                            <option value="Inundación">🌊 Inundación</option>
+                            <option value="Rescate Animal">🐕 Rescate Animal</option>
+                            <option value="Rescate Persona">👤 Rescate Persona</option>
+                            <option value="Emergencia Médica">🚑 Emergencia Médica</option>
+                            <option value="Accidente de Tránsito">🚗 Accidente de Tránsito</option>
+                            <option value="Árbol Caído">🌳 Árbol Caído</option>
+                            <option value="Avalancha">⛰️ Avalancha</option>
+                            <option value="Derrame de Combustible">⛽ Derrame de Combustible</option>
+                            <option value="Emergencia Tecnológica">💻 Emergencia Tecnológica</option>
+                            <option value="Otra">❓ Otra... ¿Cuál?</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="municipioReporte" class="form-label">Municipio</label>
+                        <select id="municipioReporte" class="form-control" required>
+                            <option value="">Seleccionar municipio</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="prioridadReporte" class="form-label">Nivel de Prioridad</label>
+                        <select id="prioridadReporte" class="form-control" required>
+                            <option value="">Seleccionar prioridad</option>
+                            <option value="ALTA">🚨 ALTA - Riesgo inminente</option>
+                            <option value="MEDIA">⚠️ MEDIA - Requiere atención</option>
+                            <option value="BAJA">ℹ️ BAJA - Sin riesgo inmediato</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Unidades Radiales Reportando</label>
+                    <div id="unidadesRadialesContainer" class="checkbox-container"></div>
+                </div>
+                <div class="form-group">
+                    <label for="responsableReporte" class="form-label">Responsable que Reporta</label>
+                    <input type="text" id="responsableReporte" class="form-control" readonly placeholder="Se autocompletará según unidades seleccionadas">
+                </div>
+                <div class="form-group">
+                    <label for="descripcionReporte" class="form-label">Descripción de la Novedad</label>
+                    <textarea id="descripcionReporte" class="form-control" rows="4" required placeholder="Describe detalladamente la situación reportada..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="ubicacionReporte" class="form-label">Ubicación Específica</label>
+                    <input type="text" id="ubicacionReporte" class="form-control" placeholder="Dirección, barrio, vereda o punto de referencia">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="cerrarModalNuevoReporte()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar Reporte</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- Módulos que usan export/import -->
     <script type="module" src="scripts/crypto-utils.js"></script>
-    <script type="module" src="scripts/sistema.js"></script>
+    <script src="scripts/sistema.js"></script> <!-- SIN type="module" -->
     <script type="module" src="scripts/seguimiento-ia.js"></script>
     <script type="module" src="scripts/clima-ia.js"></script>
-
     <script src="scripts/chatbot-ia.js"></script>
     <script src="scripts/utilidades.js"></script>
-
     
 </body>
 </html>
