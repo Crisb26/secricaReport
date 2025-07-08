@@ -621,7 +621,7 @@ select.form-control {
   display: block;
 }
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 /* Accessibility */
@@ -1287,7 +1287,7 @@ select.form-control {
   display: block;
 }
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 /* Accessibility */
